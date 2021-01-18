@@ -1,6 +1,7 @@
 body{
     background-color: #edd585;
     height: 100vh;
+    overflow: hidden;
 }
 
 @keyframes bubble {
@@ -9,16 +10,41 @@ body{
     }
 }
 
+@keyframes float{
+    25%{
+        transform: rotate(3deg) translate(0.5em, 0.5em);
+    }
+
+    50%{
+        transform: rotate(0deg) translate(0em, 1em);
+    }
+
+    75%{
+        transform: rotate(-3deg) translate(-0.5em, 0.5em);
+    }
+}
+
 .bubble {
-    height: 2em;
-    width: 2em;
     position: absolute;
     border-color: #fff;
     border-width: 1px;
     border-style: solid;
     border-radius: 50%;
-    transform: translateY(100vh);
+    transform: translateY(105vh);
     animation-name: bubble;
     animation-duration: 4s;
+    animation-timing-function: linear;
+}
+
+img{
+    display: block;
+    position: absolute;
+    top: 20vh;
+    left: 20vw;
+    z-index: 1;
+    animation-name: float;
+    animation-duration: 9s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
     animation-timing-function: linear;
 }
