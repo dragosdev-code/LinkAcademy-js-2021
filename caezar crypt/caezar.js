@@ -12,19 +12,6 @@ function crypt() {
     document.querySelector("#result").innerText = encryptedText
 }
 
-function encryptAscii(text, cypher){
-    let encryptedText = text.split("")
-                            .map(letter => encryptLetter(letter, cypher))
-                            .join("")
-    return encryptedText
-}
-
-function encryptLetter(letter, cypher){
-    let ascii = letter.charCodeAt(0)
-    let encryptedAscii = (ascii - 65 + cypher) % 26 + 65
-    return String.fromCharCode(encryptedAscii)
-}
-
 function encrypt(text, cypher) {
     let alphabet = "ABCDEFGHIJKLMNOPQRTSUVWXYZ".split("")
     let encryptedAlphabet = shift(alphabet, cypher)
@@ -50,3 +37,19 @@ function zipAlphabet(alphabet1, alphabet2) {
     }
     return zip
 }
+
+////////////// ASCII ///////////////////////////////
+
+function encryptAscii(text, cypher){
+    let encryptedText = text.split("")
+                            .map(letter => encryptLetter(letter, cypher))
+                            .join("")
+    return encryptedText
+}
+
+function encryptLetter(letter, cypher){
+    let ascii = letter.charCodeAt(0)
+    let encryptedAscii = (ascii - 65 + cypher) % 26 + 65
+    return String.fromCharCode(encryptedAscii)
+}
+
