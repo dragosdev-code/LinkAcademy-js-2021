@@ -12,7 +12,7 @@ function crypt() {
     document.querySelector("#result").innerText = encryptedText
 }
 
-function encrypt(text, cypher) {
+function encryptArray(text, cypher) {
     let alphabet = "ABCDEFGHIJKLMNOPQRTSUVWXYZ".split("")
     let encryptedAlphabet = shift(alphabet, cypher)
     let letterMap = zipAlphabet(alphabet, encryptedAlphabet)
