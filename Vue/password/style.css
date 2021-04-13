@@ -1,0 +1,36 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+p{
+    margin-top: 50px;
+    width: 10px;
+    height: 20px;
+}
+
+#app{
+
+    height: 500px;
+    width: 30%;
+    background-color: #dddddd;
+}
+
+ul li{
+    list-style: none;
+    margin-top: 0.9em;
+    color: red;
+}
+
+.done{
+    color: green;
+}
+
