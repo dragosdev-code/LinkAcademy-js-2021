@@ -4,7 +4,6 @@
         <input type="button" value="reset" @click="reset">
     </div>
   
-
 </template>
 
 <script>
