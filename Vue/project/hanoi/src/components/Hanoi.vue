@@ -1,51 +1,83 @@
 <template>
   <div class="game">
-    <div 
-     v-for="tower in game.towers"
-     :key="tower.id"
-     class="tower">
-       <div
-         v-for="disk in tower.disks"
-         :key="disk.size"
-         class="disk"
-         :style="{ 
-             backgroundColor: disk.color.getCssColor(),
-             width: disk.size + 'em'
-          }"
-       ></div>
+    <div
+    v-for="tower in game.towers"
+    :key="tower.id"
+    class="tower"
+    @dragover.prevent
+    @drop.prevent
+    @drop="drop(tower.id, $event)"
+    :style="{
+      height: game.numberOfDisks + 'em'
+    }">
+      <div
+        v-for="disk in tower.disks"
+        :key="disk.size"
+        class="disk"
+        draggable="true"
+        @dragstart="drag(tower.id, $event)"
+        :style="{
+          backgroundColor: disk.color.getCssColor(),
+          width: 2 + disk.size * (1 - (game.numberOfDisks - 1) * 0.03) + 'em',
+        }"
+      ></div>
     </div>
   </div>
 </template>
 
 <script>
-import {Game} from "../classes/classes.js";
+import { Game, Move } from "../classes/classes.js";
 
-export default {
+export default{
   data() {
     return {
-      game: new Game(5),
+      game: new Game(3),
     };
+  },
+  methods: {
+    drag(towerId, event){
+      event.dataTransfer.setData('from', towerId)
+    },
+    drop(towerId, event) {
+      let fromTowerId = event.dataTransfer.getData('from')
+      let move = new Move(fromTowerId, towerId)
+      this.game.make(move)
+    }
   },
 };
 </script>
 
 <style>
 .game {
-    height: 80vh;
-    width: 80vw;
-    display: flex;
-    justify-content: space-around;
+  height: 80vh;
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  position: relative;
 }
 
 .tower {
-    width: 30%;
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: center;
+  width: 30%;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  height: 50%;
+  position: relative;
+}
 
+.tower::before {
+  content: "";
+  background-color: #8a3809;
+  height: 110%;
+  width: 0.5em;
+  position: absolute;
+  z-index: -1;
+  border-radius: 0.2em;
 }
 
 .disk {
-    height: 1em;
+  height: 1.5em;
+  border-radius: 0.3em;
 }
 </style>
